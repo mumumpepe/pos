@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -21,3 +22,26 @@ Route::post('/register', [UserController::class, 'store']);
 Route::get('/welcome', function(){
     return view('welcome');
 });
+
+
+Route::get('/forms', function(){
+    return view('dashboard.forms');
+});
+Route::get('/index', function() {
+    return view('dashboard.index');
+});
+Route::get('/blank', function() {
+    return view('dashboard.blank');
+});
+Route::get('/tables', function() {
+    return view('dashboard.tables');
+});
+Route::get('/tabs', function() {
+    return view('dashboard.tabs');
+});
+Route::get('/calendar', function() {
+    return view('dashboard.calendar');
+});
+
+
+Route::post('/sale', [SalesController::class, 'store']);
