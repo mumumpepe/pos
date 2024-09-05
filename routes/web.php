@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
@@ -45,3 +46,4 @@ Route::get('/calendar', function() {
 
 
 Route::post('/sale', [SalesController::class, 'store']);
+

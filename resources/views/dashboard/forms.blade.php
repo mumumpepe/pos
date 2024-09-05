@@ -134,11 +134,11 @@
                                 @csrf
                                 <div class="">
                                     <label class="block text-sm text-gray-600" for="name">Name</label>
-                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text" required="" placeholder="Your Name" aria-label="Name">
+                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="customer_name" name="customer_name" type="text" required="" placeholder="Your Name" aria-label="Name">
                                 </div>
                                 <div class="mt-2">
                                     <label class="block text-sm text-gray-600" for="email">Email</label>
-                                    <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="text" required="" placeholder="Your Email" aria-label="Email">
+                                    <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="email" required="" placeholder="Your Email" aria-label="Email">
                                 </div>
                                 <div class="mt-2">
                                     <label class=" block text-sm text-gray-600" for="cus_email">Address</label>
@@ -160,7 +160,7 @@
                                     <label class="block text-sm text-gray-600" for="cus_name">Phone</label>
                                     <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="phone" name="phone" type="tel" required="" placeholder="0700 000 000" >
                                 </div>
-                        </div>
+                            </div>
                     </div>
 
                     <div class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
@@ -177,7 +177,7 @@
                                         </select>
                                     </div>
                                     <label class="block text-sm text-gray-600" for="cus_name">Quantity</label>
-                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" oninput="calculateTotal()" id="sales_quantity" name="sales_quantity" type="number" min="1" required="" placeholder="10">
+                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" oninput="calculateTotal()" id="sales_quantity" name="quantity" type="number" min="1" required="" placeholder="10">
                                 </div>
                                 <div class="mt-2">
                                     <label class=" block text-sm text-gray-600" for="cus_email">Unity Price</label>

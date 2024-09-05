@@ -17,6 +17,13 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('unity_price');
             $table->integer('total_price');
+            $table->string('customer_name');
+            $table->string('email');
+            $table->string('address');
+            $table->string('city');
+            $table->string('country');
+            $table->string('zip');
+            $table->string('phone');
             $table->timestamps();
         });
     }

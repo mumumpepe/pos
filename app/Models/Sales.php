@@ -14,5 +14,12 @@ class Sales extends Model
         'quantity',
         'unity_price',
         'total_price',
+        'customer_name',
+        'email',
+        'address',
+        'city',
+        'country',
+        'zip',
+        'phone',
 ];
 }
