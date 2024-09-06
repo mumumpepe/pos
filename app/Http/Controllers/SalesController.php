@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sales;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -61,5 +62,13 @@ class SalesController extends Controller
         $sale->update($attributes);
 
         return redirect('/admin/sales');
+    }
+
+    public function destroy ($sale){
+
+        Sales::findOrFail($sale)->delete();
+
+        return redirect('/admin/sales');
+
     }
 }

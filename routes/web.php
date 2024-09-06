@@ -59,6 +59,7 @@ Route::get('/admin/blank', [AdminController::class, 'users']);
 
 Route::get('/sale/{sale}/edit', [SalesController::class, 'edit']);
 Route::patch('/sales/{sale}', [SalesController::class, 'update']);
+Route::delete('/sales/{sale}', [SalesController::class, 'destroy']);
 
 Route::get('/admin/register', function() {
     return view('admin.register');

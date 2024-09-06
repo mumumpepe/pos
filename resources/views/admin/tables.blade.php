@@ -121,10 +121,15 @@
                                     <td class="text-left py-3 px-4">{{ Str::title($sale['customer_name']) }}</td>
                                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:{{ $sale['phone'] }}">{{ $sale['phone'] }}</a></td>
                                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="/sale/{{ $sale->id }}/edit">Edit</a></td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="/delete/sale/{{ $sale->id }}">Delete</a></td>
+                                    <td class="text-left py-3 px-4">
+                                            <form class="inline" action="/sales/{{ $sale->id }}" method="POST" id="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="bg-none text-black"> Delete</button>
+                                            </form>
+                                    </td>
                                 </tr>
                             @endforeach
-
                             </tbody>
                         </table>
                     </div>
