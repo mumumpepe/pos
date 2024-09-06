@@ -35,4 +35,31 @@ class SalesController extends Controller
         ]);
 
     }
+
+    public function edit(Sales $sale) {
+
+        return view('admin.edit-sale', [
+            'sale' => $sale
+        ]);
+    }
+
+    public  function update(Sales $sale){
+        $attributes = request()->validate([
+            'product_name' => ['required'],
+            'quantity' => ['required'],
+            'unity_price' => ['required'],
+            'total_price' => ['required'],
+            'customer_name' => ['required'],
+            'email' => ['required'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'country' => ['required'],
+            'zip' => ['required'],
+            'phone' => ['required']
+        ]);
+
+        $sale->update($attributes);
+
+        return redirect('/admin/sales');
+    }
 }

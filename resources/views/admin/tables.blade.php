@@ -106,9 +106,9 @@
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Product</th>
                                     <th class="w-1/8 text-left py-3 px-4 uppercase font-semibold text-sm">Quantity</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Price</th>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer</td>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th></td>
-                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</td>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm" colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
@@ -119,9 +119,9 @@
                                     <td class="w-1/8 text-left py-3 px-4">{{ $sale['quantity'] }}</td>
                                     <td class="text-left py-3 px-4">{{ Number::currency($sale['total_price'], in: 'Tsh.') }}</td>
                                     <td class="text-left py-3 px-4">{{ Str::title($sale['customer_name']) }}</td>
-                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:{{ $sale['email'] }}">{{ $sale['email'] }}</a></td>
                                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:{{ $sale['phone'] }}">{{ $sale['phone'] }}</a></td>
-
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="/sale/{{ $sale->id }}/edit">Edit</a></td>
+                                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="/delete/sale/{{ $sale->id }}">Delete</a></td>
                                 </tr>
                             @endforeach
 
