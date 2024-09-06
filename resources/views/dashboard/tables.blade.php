@@ -25,12 +25,11 @@
 
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
-            <a href="/index" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
+            <a href="/sales" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
             <x-link href="/sales" :active="request()->is('sales')"><i class="fas fa-coins mr-3"></i>Sales</x-link>
-            <x-link href="/blank" :active="request()->is('blank')"><i class="fas fa-sticky-note mr-3"></i>Blank Page</x-link>
-            <x-link href="/tables" :active="request()->is('tables')"><i class="fas fa-table mr-3"></i>Tables</x-link>
+            <x-link href="/tables" :active="request()->is('tables')"><i class="fas fa-table mr-3"></i>Recent Sales</x-link>
             <x-link href="/calendar" :active="request()->is('calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
         </nav>
     </aside>
@@ -55,7 +54,7 @@
         <!-- Mobile Header & Nav -->
         <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
             <div class="flex items-center justify-between">
-                <a href="/index" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
+                <a href="/sales" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
                 <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
                     <i x-show="!isOpen" class="fas fa-bars"></i>
                     <i x-show="isOpen" class="fas fa-times"></i>
@@ -68,18 +67,9 @@
                     <i class="fas fa-coins mr-3"></i>
                     Sales
                 </a>
-
-                <a href="/blank" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-sticky-note mr-3"></i>
-                    Blank Page
-                </a>
                 <a href="/tables" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
                     <i class="fas fa-table mr-3"></i>
-                    Tables
-                </a>
-                <a href="/sales" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-coins mr-3"></i>
-                    Sales
+                    Recent Sales
                 </a>
                 <a href="/calendar" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-calendar mr-3"></i>
@@ -97,18 +87,12 @@
                     <i class="fas fa-sign-out-alt mr-3"></i>
                     Sign Out
                 </a>
-                <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
-                </button>
             </nav>
-            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button> -->
         </header>
 
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
-                <h1 class="text-3xl text-black pb-6">Tables</h1>
+                <h1 class="text-3xl text-black pb-6">Sales Record</h1>
 
                 <div class="w-full mt-6">
                     <p class="text-xl pb-3 flex items-center">
@@ -120,7 +104,7 @@
                                 <tr>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Product</th>
                                     <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Total Price</th>
-                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
+                                    <th class="w-1/4 text-left py-3 px-4 uppercase font-semibold text-sm">Customer Name</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
                                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
                                 </tr>
@@ -130,8 +114,8 @@
                             @foreach ($sales as $sale)
                                 <tr>
                                     <td class="w-1/6 text-left py-3 px-4">{{ $sale['product_name'] }}</td>
-                                    <td class="w-1/6 text-left py-3 px-4">{{ $sale['total_price'] }}</td>
-                                    <td class="w-1/3 text-left py-3 px-4">{{ $sale['customer_name'] }}</td>
+                                    <td class="w-1/6 text-left py-3 px-4">{{ Number::currency($sale['total_price'], in: 'TSH') }}</td>
+                                    <td class="w-1/4 text-left py-3 px-4">{{ Str::title($sale['customer_name']) }}</td>
                                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:{{ $sale['email'] }}">{{ $sale['email'] }}</a></td>
                                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:{{ $sale['phone'] }}">{{ $sale['phone'] }}</a></td>
                                 </tr>
@@ -140,9 +124,9 @@
                         </table>
                     </div>
                 </div>
-
-
-
+                <div class="mt-4">
+                {{ $sales->links() }}
+                </div>
             </main>
 
             <footer class="w-full bg-white text-right p-4">

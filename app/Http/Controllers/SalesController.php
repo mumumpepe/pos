@@ -29,7 +29,7 @@ class SalesController extends Controller
     }
 
     public function index() {
-        $sale = Sales::all();
+        $sale = Sales::latest()->simplePaginate(10);
         return view('dashboard.tables', [
             'sales' => $sale
         ]);

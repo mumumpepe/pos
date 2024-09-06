@@ -8,7 +8,7 @@
     <meta name="description" content="">
 
     <!-- Tailwind -->
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
         .font-family-karla { font-family: karla; }
@@ -25,12 +25,11 @@
 
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
-            <a href="/index" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
+            <a href="/sales" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
             <x-link href="/sales" :active="request()->is('sales')"><i class="fas fa-coins mr-3"></i>Sales</x-link>
-            <x-link href="/blank" :active="request()->is('blank')"><i class="fas fa-sticky-note mr-3"></i>Blank Page</x-link>
-            <x-link href="/tables" :active="request()->is('tables')"><i class="fas fa-table mr-3"></i>Tables</x-link>
+            <x-link href="/tables" :active="request()->is('tables')"><i class="fas fa-table mr-3"></i>Recent Sales</x-link>
             <x-link href="/calendar" :active="request()->is('calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
         </nav>
 
@@ -66,41 +65,15 @@
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="/blank" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-sticky-note mr-3"></i>
-                    Blank Page
-                </a>
-                <a href="/blanks" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-table mr-3"></i>
-                    Tables
-                </a>
-                <a href="/sales" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
-                    <i class="fas fa-coins mr-3"></i>
-                    Sales
-                </a>
-                <a href="/calendar" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-calendar mr-3"></i>
-                    Calendar
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-cogs mr-3"></i>
-                    Support
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    Sign Out
-                </a>
-                <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
-                </button>
+
+                <x-sm-link href="/sales"> <i class="fas fa-coins mr-3"></i>Sales</x-sm-link>
+                <x-sm-link href="/tables"> <i class="fas fa-coins mr-3"></i>Recent Sales</x-sm-link>
+                <x-sm-link href="/calendar"> <i class="fas fa-coins mr-3"></i>Calendar</x-sm-link>
+                <x-sm-link href="#"> <i class="fas fa-coins mr-3"></i>Support</x-sm-link>
+                <x-sm-link href="#"> <i class="fas fa-coins mr-3"></i>My Account</x-sm-link>
+                <x-sm-link href="3"> <i class="fas fa-coins mr-3"></i>Sign Out</x-sm-link>
+
             </nav>
-            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button>
         </header>
 
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
@@ -115,34 +88,41 @@
                         <div class="leading-loose">
                             <form class="p-10 bg-white rounded shadow-xl" action="/sale" method="POST">
                                 @csrf
-                                <div class="">
-                                    <label class="block text-sm text-gray-600" for="name">Name</label>
-                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="customer_name" name="customer_name" type="text" required="" placeholder="Your Name" aria-label="Name">
-                                </div>
-                                <div class="mt-2">
-                                    <label class="block text-sm text-gray-600" for="email">Email</label>
-                                    <input class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded" id="email" name="email" type="email" required="" placeholder="Your Email" aria-label="Email">
-                                </div>
-                                <div class="mt-2">
-                                    <label class=" block text-sm text-gray-600" for="cus_email">Address</label>
-                                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="address" name="address" type="text" required="" placeholder="Street" >
-                                </div>
-                                <div class="mt-2">
-                                    <label class="hidden text-sm block text-gray-600" for="cus_email">City</label>
-                                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="city" name="city" type="text" required="" placeholder="City" >
-                                </div>
-                                <div class="inline-block mt-2 w-1/2 pr-1">
-                                    <label class="hidden block text-sm text-gray-600" for="cus_email">Country</label>
-                                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="country" name="country" type="text" required="" placeholder="Country" >
-                                </div>
-                                <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
-                                    <label class="hidden block text-sm text-gray-600" for="cus_email">Zip</label>
-                                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="zip"  name="zip" type="text" required="" placeholder="Zip">
-                                </div>
-                                <div class="">
-                                    <label class="block text-sm text-gray-600" for="cus_name">Phone</label>
-                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" id="phone" name="phone" type="tel" required="" placeholder="0700 000 000" >
-                                </div>
+                                <x-div-input>
+                                    <x-label for="name">Name</x-label>
+                                    <x-input type="text" id="customer_name" name="customer_name"></x-input>
+                                </x-div-input>
+
+                                <x-div-input>
+                                    <x-label for="email">Email</x-label>
+                                    <x-input type="email" id="email" name="email" class="py-4"></x-input>
+                                </x-div-input>
+
+                                <x-div-input>
+                                    <x-label for="address">Address</x-label>
+                                    <x-input  class="py-2" type="text" id="address" name="address" placeholder="Street"></x-input>
+                                </x-div-input>
+
+                                <x-div-input>
+                                    <x-label for="city" class="hidden">City</x-label>
+                                    <x-input class="py-2" type="text" id="city" name="city" placeholder="City"></x-input>
+                                </x-div-input>
+
+                                <x-div-input class="inline-block mt-2 w-1/2 pr-1">
+                                    <x-label for="country" class="hidden">Country</x-label>
+                                    <x-input class="py-2" type="text" id="country" name="country" placeholder="Country"></x-input>
+                                </x-div-input>
+
+                                <x-div-input class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+                                    <x-label for="zip" class="hidden">Zip</x-label>
+                                    <x-input class="py-2" type="text" id="zip" name="zip"></x-input>
+                                </x-div-input>
+
+                                <x-div-input>
+                                    <x-label for="phone">Phone</x-label>
+                                    <x-input type="tel" id="phone" name="phone" class="px-5 py-1" placeholder="0700 000 000"></x-input>
+                                </x-div-input>
+
                             </div>
                     </div>
 
@@ -154,22 +134,27 @@
                             <div class="p-10 bg-white rounded shadow-xl">
                                 <div class="">
                                     <div class="">
-                                        <label class="block text-sm text-gray-600" for="name">Product Name</label>
+                                        <label class="block text-sm text-gray-600" for="product_name">Product Name</label>
                                         <select class="w-full px-5 py-3 text-gray-700 bg-gray-200 rounded" id="product_name" name="product_name" required="">
                                             <option>Juice</option>
                                         </select>
                                     </div>
-                                    <label class="block text-sm text-gray-600" for="cus_name">Quantity</label>
-                                    <input class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" oninput="calculateTotal()" id="sales_quantity" name="quantity" type="number" min="1" required="" placeholder="10">
-                                </div>
-                                <div class="mt-2">
-                                    <label class=" block text-sm text-gray-600" for="cus_email">Unity Price</label>
-                                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" oninput="calculateTotal()" id="unity_price" name="unity_price" type="number" required="" placeholder="Tsh 200" >
-                                </div>
-                                <div class="mt-2">
-                                    <label class=" block text-sm text-gray-600" for="cus_email">Total Price</label>
-                                    <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="total_price" name="total_price" type="number" required="" readonly>
-                                </div>
+
+                                    <x-div-input>
+                                        <x-label for="quantity">Quantity</x-label>
+                                        <x-input type="number" min="1" id="sales_quantity" name="quantity" class="px-5 py-1" placeholder="10" oninput="calculateTotal()"></x-input>
+                                    </x-div-input>
+
+                                    <x-div-input>
+                                        <x-label for="unity_price">Unity Price</x-label>
+                                        <x-input class="py-2" type="number" min="1" id="unity_price" name="unity_price" class="px-5 py-1" placeholder="Tsh. 200" oninput="calculateTotal()"></x-input>
+                                    </x-div-input>
+
+                                    <x-div-input>
+                                        <x-label for="total_price">Total Price</x-label>
+                                        <x-input class="py-2" type="number"  id="total_price" name="total_price" class="px-5 py-1" placeholder="Tsh. 1000" readonly></x-input>
+                                    </x-div-input>
+
 
                                 <div class="mt-6">
                                     <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit"><b id="total_button">Tsh. 0</b></button>
@@ -187,6 +172,8 @@
         </div>
 
     </div>
+
+
 
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
