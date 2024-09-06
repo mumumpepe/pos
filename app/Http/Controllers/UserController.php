@@ -35,5 +35,11 @@ class UserController extends Controller
         return redirect('/welcome');
     }
 
+    public function edit() {
+//        $id = request('user_id');
+
+        return view('admin.edit-user');
+    }
+
 
 }
