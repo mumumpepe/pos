@@ -31,9 +31,11 @@
             </button>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
+            <x-link href="/index" :active="request()->is('index')"><i class="fas fa-tachometer-alt mr-3"></i>Dashboard</x-link>
             <x-link href="/blank" :active="request()->is('blank')"><i class="fas fa-sticky-note mr-3"></i>Blank Page</x-link>
             <x-link href="/tables" :active="request()->is('tables')"><i class="fas fa-table mr-3"></i>Tables</x-link>
-            <x-link href="/sales" :active="request()->is('sales')"><i class="fas fa-coins mr-3"></i>Sales</x-link>
+            <x-link href="/forms" :active="request()->is('forms')"><i class="fas fa-coins mr-3"></i>Sales</x-link>
+            <x-link href="/tabs" :active="request()->is('tabs')"><i class="fas fa-tablet-alt mr-3"></i>Tabbed Content</x-link>
             <x-link href="/calendar" :active="request()->is('calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
         </nav>
         <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
@@ -62,7 +64,7 @@
         <!-- Mobile Header & Nav -->
         <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
             <div class="flex items-center justify-between">
-                <a href="/index" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
+                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
                 <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
                     <i x-show="!isOpen" class="fas fa-bars"></i>
                     <i x-show="isOpen" class="fas fa-times"></i>
@@ -71,27 +73,27 @@
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="/index" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="index.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     Dashboard
                 </a>
-                <a href="/blank" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="blank.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-sticky-note mr-3"></i>
                     Blank Page
                 </a>
-                <a href="/tables" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-table mr-3"></i>
                     Tables
                 </a>
-                <a href="/sales" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-coins mr-3"></i>
                     Sales
                 </a>
-                <a href="/tabs" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                <a href="tabs.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
                     <i class="fas fa-tablet-alt mr-3"></i>
                     Tabbed Content
                 </a>
-                <a href="/calendar" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-calendar mr-3"></i>
                     Calendar
                 </a>

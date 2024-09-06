@@ -24,7 +24,15 @@ class SalesController extends Controller
 
        $job = Sales::create($attributes);
 
-        return redirect('/forms');
+        return redirect('/sales');
+
+    }
+
+    public function index() {
+        $sale = Sales::all();
+        return view('dashboard.tables', [
+            'sales' => $sale
+        ]);
 
     }
 }

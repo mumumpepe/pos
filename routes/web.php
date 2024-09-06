@@ -25,8 +25,8 @@ Route::get('/welcome', function(){
 });
 
 
-Route::get('/forms', function(){
-    return view('dashboard.forms');
+Route::get('/sales', function(){
+    return view('dashboard.sales');
 });
 Route::get('/index', function() {
     return view('dashboard.index');
@@ -34,9 +34,9 @@ Route::get('/index', function() {
 Route::get('/blank', function() {
     return view('dashboard.blank');
 });
-Route::get('/tables', function() {
-    return view('dashboard.tables');
-});
+
+Route::get('/tables', [SalesController::class, 'index']);
+
 Route::get('/tabs', function() {
     return view('dashboard.tabs');
 });

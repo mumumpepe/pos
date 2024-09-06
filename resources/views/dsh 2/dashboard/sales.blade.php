@@ -34,7 +34,7 @@
             <x-link href="/index" :active="request()->is('index')"><i class="fas fa-tachometer-alt mr-3"></i>Dashboard</x-link>
             <x-link href="/blank" :active="request()->is('blank')"><i class="fas fa-sticky-note mr-3"></i>Blank Page</x-link>
             <x-link href="/tables" :active="request()->is('tables')"><i class="fas fa-table mr-3"></i>Tables</x-link>
-            <x-link href="/forms" :active="request()->is('forms')"><i class="fas fa-align-left mr-3"></i>Forms</x-link>
+            <x-link href="/forms" :active="request()->is('forms')"><i class="fas fa-coins mr-3"></i>Sales</x-link>
             <x-link href="/tabs" :active="request()->is('tabs')"><i class="fas fa-tablet-alt mr-3"></i>Tabbed Content</x-link>
             <x-link href="/calendar" :active="request()->is('calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
         </nav>
@@ -88,8 +88,8 @@
                     Tables
                 </a>
                 <a href="forms.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
-                    <i class="fas fa-align-left mr-3"></i>
-                    Forms
+                    <i class="fas fa-coins mr-3"></i>
+                    Sales
                 </a>
                 <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-tablet-alt mr-3"></i>
