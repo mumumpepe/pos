@@ -82,3 +82,7 @@ Route::get('/user/{id}/edit', [UserController::class, 'edit']);
 Route::patch('/user/{id}/edit', [UserController::class, 'update']);
 
 Route::delete('/user/{id}/delete', [UserController::class, 'destroy']);
+
+Route::get('/admin/report', [AdminController::class, 'report']);
+
+Route::post('/report', [AdminController::class, 'create']);

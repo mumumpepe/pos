@@ -26,8 +26,8 @@
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
-            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
+                <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
             </button>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
@@ -38,7 +38,7 @@
             <x-link href="/admin/tabbed" :active="request()->is('admin/tabbed')"><i class="fas fa-tablet-alt mr-3"></i>Tabbed Content</x-link>
             <x-link href="/admin/calendar" :active="request()->is('admin/calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
         </nav>
-        <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+        <a href="/admin/report" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
             <i class="fas fa-arrow-circle-up mr-3"></i>
             Upgrade to Pro!
         </a>
@@ -86,9 +86,9 @@
                     <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
                 </button>
             </nav>
-            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-                <i class="fas fa-plus mr-3"></i> New Report
-            </button> -->
+             <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                 <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
+             </button>
         </header>
 
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">

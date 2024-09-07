@@ -32,13 +32,13 @@
     </div>
     <nav class="text-white text-base font-semibold pt-3">
         <x-link href="/admin/dashboard" :active="request()->is('admin/dashboard')"><i class="fas fa-tachometer-alt mr-3"></i>Dashboard</x-link>
-        <x-link href="/admin/blank" :active="request()->is('admin/blank')"><i class="fas fa-user mr-3"></i>Users</x-link>
+        <x-link href="/admin/blank" :active="request()->is('admin/blank')"><i class="fas fa-user mr-3"></i>User</x-link>
         <x-link href="/admin/sales" :active="request()->is('admin/sales')"><i class="fas fa-coins mr-3"></i>Sales</x-link>
-        <x-link href="/admin/register" :active="request()->is('admin/register')"><i class="fas fa-table mr-3"></i>Register</x-link>
+        <x-link href="/admin/register" :active="request()->is('admin/tables')"><i class="fas fa-table mr-3"></i>Register</x-link>
         <x-link href="/admin/tabbed" :active="request()->is('admin/tabbed')"><i class="fas fa-tablet-alt mr-3"></i>Tabbed Content</x-link>
         <x-link href="/admin/calendar" :active="request()->is('admin/calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
     </nav>
-    <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
+    <a href="/admin/report" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
         <i class="fas fa-arrow-circle-up mr-3"></i>
         Upgrade to Pro!
     </a>
@@ -86,46 +86,55 @@
                 <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
             </button>
         </nav>
-         <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+        <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
             <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
         </button>
     </header>
 
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
+            <h1 class="text-3xl text-black pb-6">Sales Report</h1>
 
-            <div class="bg-cover bg-center bg-fixed" style="background-image: url('https://picsum.photos/1920/1080')">
-                <div class="h-screen flex justify-center items-center">
-                    <div class="bg-white mx-4 p-8 rounded shadow-md w-full md:w-1/2 lg:w-1/3">
-                        <h1 class="text-3xl font-bold mb-8 text-center">Edit User Details</h1>
-                        <form action="/user/{{ $id->id }}/edit" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <div class="mb-4">
-                                <x-forms.label>First Name</x-forms.label>
-                                <x-forms.input  name="first_name" value="{{ $id->first_name }}" required />
-                            </div>
-                            <div class="mb-4">
-                                <x-forms.label>Last Name</x-forms.label>
-                                <x-forms.input  name="last_name" value="{{ $id->last_name }}" required />
-                            </div>
-                            <div class="mb-4">
-                                <x-forms.label>Email</x-forms.label>
-                                <x-forms.input name="email" type="email" value="{{ $id->email }}" required />
-                            </div>
-                            <div class="mb-4">
-                                <x-forms.label>Password</x-forms.label>
-                                <x-forms.input name="password" type="password"  required />
-                            </div>
-                            <div class="mb-6">
-                                <x-forms.button type="submit">Save Changes</x-forms.button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="w-full mt-6">
+                <p class="text-xl pb-3 flex items-center">
+                    <i class="fas fa-coins mr-3"></i> From {{ $start_date }} to {{ $end_date }}
+                </p>
+                <div class="bg-white overflow-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">Product</th>
+                            <th class="w-1/8 text-left py-3 px-4 uppercase font-semibold text-sm">Quantity</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Price</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Customer</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+
+                        @foreach($sales as $sale)
+                            <tr>
+                                <td class="w-1/6 text-left py-3 px-4">{{ $sale['product_name'] }}</td>
+                                <td class="w-1/8 text-left py-3 px-4">{{ $sale['quantity'] }}</td>
+                                <td class="text-left py-3 px-4">{{ Number::currency($sale['total_price'], in: 'Tsh.') }}</td>
+                                <td class="text-left py-3 px-4">{{ Str::title($sale['customer_name']) }}</td>
+                                <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:{{ $sale['phone'] }}">{{ $sale['phone'] }}</a></td>
+                            </tr>
+                        @endforeach
+                        <tr class="bg-gray-800 text-white">
+                            <th class="w-1/6 text-left py-3 px-4 uppercase font-semibold text-sm">GRAND TOTAL</th>
+                            <th class="w-1/8 text-left py-3 px-4 uppercase font-semibold text-sm"></th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">{{ Number::currency($grand_total, in: 'Tsh.') }}</th>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-
+            <div class="mt-4">
+                {{ $sales->links() }}
+            </div>
         </main>
 
         <footer class="w-full bg-white text-right p-4">

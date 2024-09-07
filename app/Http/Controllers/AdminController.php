@@ -22,5 +22,28 @@ class AdminController extends Controller
         ]);
     }
 
+    public function report() {
+        return view ('admin.report');
+    }
+
+    public function create() {
+        $attributes = request()->validate([
+           'start_date' => ['required'],
+           'end_date' => ['required'],
+        ]);
+
+        $start_date = request('start_date');
+        $end_date = request('end_date');
+
+         $sales  = Sales::whereBetween('created_at', [$start_date, $end_date.' 23:59:59'])->simplePaginate(10);
+         $total = $sales->sum('total_price');
+
+       return view('admin.generate-report', [
+           'sales' => $sales,
+           'start_date' => $start_date,
+           'end_date' => $end_date,
+           'grand_total' => $total,
+       ]);
+    }
 
 }

@@ -27,7 +27,7 @@
     <div class="p-6">
         <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
         <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-            <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
+              <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
         </button>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
@@ -86,44 +86,51 @@
                 <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
             </button>
         </nav>
-         <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
-            <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
+        <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+              <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
         </button>
     </header>
 
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
 
-            <div class="bg-cover bg-center bg-fixed" style="background-image: url('https://picsum.photos/1920/1080')">
-                <div class="h-screen flex justify-center items-center">
-                    <div class="bg-white mx-4 p-8 rounded shadow-md w-full md:w-1/2 lg:w-1/3">
-                        <h1 class="text-3xl font-bold mb-8 text-center">Edit User Details</h1>
-                        <form action="/user/{{ $id->id }}/edit" method="POST">
+
+            <h1 class="w-full text-3xl text-black pb-6">Sales Report</h1>
+
+            <div class="flex flex-wrap">
+                <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+                    <p class="text-xl pb-6 flex items-center">
+                        <i class="fas fa-calendar mr-3"></i>Start Date
+                    </p>
+                    <div class="leading-loose">
+                        <form class="p-10 bg-white rounded shadow-xl" action="/report" method="POST">
                             @csrf
-                            @method('PATCH')
-                            <div class="mb-4">
-                                <x-forms.label>First Name</x-forms.label>
-                                <x-forms.input  name="first_name" value="{{ $id->first_name }}" required />
-                            </div>
-                            <div class="mb-4">
-                                <x-forms.label>Last Name</x-forms.label>
-                                <x-forms.input  name="last_name" value="{{ $id->last_name }}" required />
-                            </div>
-                            <div class="mb-4">
-                                <x-forms.label>Email</x-forms.label>
-                                <x-forms.input name="email" type="email" value="{{ $id->email }}" required />
-                            </div>
-                            <div class="mb-4">
-                                <x-forms.label>Password</x-forms.label>
-                                <x-forms.input name="password" type="password"  required />
-                            </div>
-                            <div class="mb-6">
-                                <x-forms.button type="submit">Save Changes</x-forms.button>
-                            </div>
-                        </form>
+                            <x-div-input>
+                                <x-label for="name"></x-label>
+                                <x-input type="date" id="start_date" name="start_date" ></x-input>
+                            </x-div-input>
                     </div>
                 </div>
-            </div>
+
+                <div class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
+                    <p class="text-xl pb-6 flex items-center">
+                        <i class="fas fa-calendar mr-3"></i> End Date
+                    </p>
+                    <div class="leading-loose">
+                        <div class="p-10 bg-white rounded shadow-xl">
+                            <div class="">
+                                <x-div-input>
+                                    <x-label for="end_date"></x-label>
+                                    <x-input type="date" id="end_date" max="{{ date('Y-m-d') }}" name="end_date" class="px-5 py-1"></x-input>
+                                </x-div-input>
+                                <div class="mt-6">
+                                    <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Generate</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
 
         </main>
@@ -139,5 +146,7 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

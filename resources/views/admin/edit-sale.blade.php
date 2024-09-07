@@ -26,6 +26,9 @@
 <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
     <div class="p-6">
         <a href="/sales" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">POS</a>
+        <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+            <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
+        </button>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
         <x-link href="/admin/dashboard" :active="request()->is('admin/dashboard')"><i class="fas fa-tachometer-alt mr-3"></i>Dashboard</x-link>
@@ -35,8 +38,6 @@
         <x-link href="/admin/tabbed" :active="request()->is('admin/tabbed')"><i class="fas fa-tablet-alt mr-3"></i>Tabbed Content</x-link>
         <x-link href="/admin/calendar" :active="request()->is('admin/calendar')"><i class="fas fa-calendar mr-3"></i>Calendar</x-link>
     </nav>
-
-
 </aside>
 
 <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
@@ -78,8 +79,10 @@
             <x-sm-link href="#"> <i class="fas fa-coins mr-3"></i>Support</x-sm-link>
             <x-sm-link href="#"> <i class="fas fa-coins mr-3"></i>My Account</x-sm-link>
             <x-sm-link href="#"> <i class="fas fa-coins mr-3"></i>Sign Out</x-sm-link>
-
         </nav>
+        <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+            <a href="/admin/report"> <i class="fas fa-plus mr-3"></i> New Report</a>
+        </button>
     </header>
 
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
