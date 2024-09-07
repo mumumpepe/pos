@@ -96,8 +96,9 @@
             <h1 class="text-3xl text-black pb-6">Sales Report</h1>
 
             <div class="w-full mt-6">
-                <p class="text-xl pb-3 flex items-center">
-                    <i class="fas fa-coins mr-3"></i> From {{ $start_date }} to {{ $end_date }}
+                <p class="text-xl pb-3 flex justify-between items-center">
+                    <span><i class="fas fa-coins mr-3"></i> From {{ $start_date }} to {{ $end_date }}</span>  <span> Grand Total: {{ Number::currency($grand_total, in: 'Tsh.') }}</span>
+                     <span><a href="/pdf/{{ $start_date }}/{{ $end_date }}"><i class="fas fa-file-pdf mr-3"></i>Pdf</a> <a href="/excel"><i class="fas fa-file-excel mr-3"></i>Excel</a></span>
                 </p>
                 <div class="bg-white overflow-auto">
                     <table class="min-w-full bg-white">
@@ -131,9 +132,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="mt-4">
-                {{ $sales->links() }}
             </div>
         </main>
 

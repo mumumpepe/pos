@@ -4,9 +4,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
+use App\Models\Sales;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+//use PDFlib;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -86,3 +88,20 @@ Route::delete('/user/{id}/delete', [UserController::class, 'destroy']);
 Route::get('/admin/report', [AdminController::class, 'report']);
 
 Route::post('/report', [AdminController::class, 'create']);
+
+Route::get('/pdf/{start}/{end}', function ($start, $end){
+    $sales = \App\Models\Sales::get();
+
+    $sales  = Sales::whereBetween('created_at', [$start, $end.' 23:59:59'])->get();
+    $total = $sales->sum('total_price');
+
+    return view('admin.pdf', [
+        'sales' => $sales,
+        'start_date' => $start,
+        'end_date' => $end,
+        'grand_total' => $total,
+    ]);
+
+//    $pdf = Pdf::loadView('pdf');
+
+});

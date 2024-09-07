@@ -35,7 +35,7 @@ class AdminController extends Controller
         $start_date = request('start_date');
         $end_date = request('end_date');
 
-         $sales  = Sales::whereBetween('created_at', [$start_date, $end_date.' 23:59:59'])->simplePaginate(10);
+         $sales  = Sales::whereBetween('created_at', [$start_date, $end_date.' 23:59:59'])->get();
          $total = $sales->sum('total_price');
 
        return view('admin.generate-report', [
