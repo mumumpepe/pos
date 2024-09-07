@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sales;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -44,6 +45,24 @@ class AdminController extends Controller
            'end_date' => $end_date,
            'grand_total' => $total,
        ]);
+    }
+
+    public function pdf($start, $end) {
+            $sales = Sales::get();
+
+            $sales  = Sales::whereBetween('created_at', [$start, $end.' 23:59:59'])->get();
+            $total = $sales->sum('total_price');
+
+           $pdf = PDF::loadView('admin.pdf', [
+               'sales' => $sales,
+               'start_date' => $start,
+               'end_date' => $end,
+               'grand_total' => $total,
+           ]);
+
+           $pdf->setPaper('A4', 'landscape');
+
+            return $pdf->download('report_from_'.$start.'_to_'.$end.'.pdf');
     }
 
 }
