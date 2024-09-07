@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
@@ -77,4 +76,9 @@ Route::get('/admin/tabbed', function() {
     return view('admin.tabs');
 });
 
-Route::get('/edit/user', [UserController::class, 'edit']);
+Route::get('/admin/users', [AdminController::class, 'users']);
+
+Route::get('/user/{id}/edit', [UserController::class, 'edit']);
+Route::patch('/user/{id}/edit', [UserController::class, 'update']);
+
+Route::delete('/user/{id}/delete', [UserController::class, 'destroy']);

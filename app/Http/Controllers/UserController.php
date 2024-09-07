@@ -35,11 +35,29 @@ class UserController extends Controller
         return redirect('/welcome');
     }
 
-    public function edit() {
-//        $id = request('user_id');
-
-        return view('admin.edit-user');
+    public function edit(User $id) {
+        return view('admin.edit-user', [
+            'id' => $id,
+        ]);
     }
 
+    public function update(User $id){
+        $attributes = request()->validate([
+           'first_name'=> ['required'],
+           'last_name' => ['required'],
+           'email' => ['required'],
+           'password' => ['required'],
+        ]);
+
+        $id->update($attributes);
+
+        return redirect('/admin/users');
+    }
+
+    public function destroy($id){
+       User::findOrFail($id)-> delete();
+
+        return redirect('/admin/users');
+    }
 
 }

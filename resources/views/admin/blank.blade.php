@@ -162,17 +162,17 @@
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <span
                                             class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                   <a class="text-gray-900 whitespace-no-wrap" href="/edit/user?user_id={{ $user->id }}">
+                                   <a class="text-gray-900 whitespace-no-wrap" href="/user/{{ $user->id }}/edit">
                                               Edit
                                             </a>
                                         </span>
 
-                                    <span
-                                        class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                    <a class="text-gray-900 whitespace-no-wrap" href="delete/user">
-                                                Delete
-                                            </a>
-                                        </span>
+                                    <form action="/user/{{ $user->id }}/delete" method = "POST"  class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight" >
+                                        @csrf
+                                        @method('DELETE')
+                                    <span>
+                                        <button class="bg-none text-gray-900 whitespace-no-wrap" type="submit">Delete</button>
+                                    </form>
                                 </td>
 
                                 @endforeach

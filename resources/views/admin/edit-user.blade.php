@@ -94,6 +94,36 @@
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
 
+            <div class="bg-cover bg-center bg-fixed" style="background-image: url('https://picsum.photos/1920/1080')">
+                <div class="h-screen flex justify-center items-center">
+                    <div class="bg-white mx-4 p-8 rounded shadow-md w-full md:w-1/2 lg:w-1/3">
+                        <h1 class="text-3xl font-bold mb-8 text-center">Edit User Details</h1>
+                        <form action="/user/{{ $id->id }}/edit" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="mb-4">
+                                <x-forms.label>First Name</x-forms.label>
+                                <x-forms.input  name="first_name" value="{{ $id->first_name }}" required />
+                            </div>
+                            <div class="mb-4">
+                                <x-forms.label>Last Name</x-forms.label>
+                                <x-forms.input  name="last_name" value="{{ $id->last_name }}" required />
+                            </div>
+                            <div class="mb-4">
+                                <x-forms.label>Email</x-forms.label>
+                                <x-forms.input name="email" type="email" value="{{ $id->email }}" required />
+                            </div>
+                            <div class="mb-4">
+                                <x-forms.label>Password</x-forms.label>
+                                <x-forms.input name="password" type="password"  required />
+                            </div>
+                            <div class="mb-6">
+                                <x-forms.button type="submit">Save Changes</x-forms.button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 
         </main>
