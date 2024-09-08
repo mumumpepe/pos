@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -30,8 +31,17 @@ class SessionController extends Controller
         //regenerate the session token
         request()->session()->regenerate();
 
-        //redirect
-        return redirect('/welcome');
+        //fetching role of the user
+            $role = User::where('email', request('email'))->first();
+            $real_role = $role['role'];
+            if($real_role == 'salesman'){
+                return redirect('/sales');
+            } elseif( $real_role == 'administrator') {
+                return redirect('/admin/dashboard');
+            } else {
+                return redirect('/login');
+            }
+
         }
     }
 }

@@ -50,9 +50,7 @@ Route::get('/calendar', function() {
 Route::post('/sale', [SalesController::class, 'store']);
 
 
-Route::get('/admin/dashboard', function() {
-    return view('admin.index');
-});
+Route::get('/admin/dashboard', [AdminController::class, 'index']);
 
 Route::get('/admin/sales', [AdminController::class, 'sales']);
 
@@ -90,3 +88,6 @@ Route::get('/admin/report', [AdminController::class, 'report']);
 Route::post('/report', [AdminController::class, 'create']);
 
 Route::get('/pdf/{start}/{end}', [AdminController::class , 'pdf']);
+
+
+Route::post('/logout', [UserController::class, 'logout']);

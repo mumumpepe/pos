@@ -32,7 +32,7 @@ class UserController extends Controller
         Auth::login($user);
 
         //redirect somewhere
-        return redirect('/welcome');
+        return redirect('/admin/users');
     }
 
     public function edit(User $id) {
@@ -58,6 +58,12 @@ class UserController extends Controller
        User::findOrFail($id)-> delete();
 
         return redirect('/admin/users');
+    }
+
+    public function logout() {
+        Auth::logout();
+
+        return redirect('/');
     }
 
 }
