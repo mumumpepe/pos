@@ -16,8 +16,10 @@ jobs:
     - name: Upload to FTP
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
-        ftp-server: ftps://ftpupload.net  # FTPS server URL for secure FTP
-        ftp-username: ${{ secrets.FTP_USERNAME }}  # FTP username from GitHub Secrets
-        ftp-password: ${{ secrets.FTP_PASSWORD }}  # FTP password from GitHub Secrets
-        local-dir: ./  # Local directory to upload (current directory in the repo)
-        git-ftp-args: --tls-auth --insecure  # Use TLS authentication, optional `--insecure` for self-signed certs
+        server: ftps://ftpupload.net  # FTPS server URL
+        username: ${{ secrets.FTP_USERNAME }}  # FTP username from GitHub Secrets
+        password: ${{ secrets.FTP_PASSWORD }}  # FTP password from GitHub Secrets
+        port: 21  # Port for FTP
+        protocol: ftps  # Specify FTPS for secure FTP
+        local-dir: ./  # Local directory to upload
+        log-level: verbose  # Enable verbose logging for debugging
