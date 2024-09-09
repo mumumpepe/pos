@@ -16,10 +16,10 @@ jobs:
     - name: Upload to FTP
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
-        server: ftps://ftpupload.net  # FTPS server URL
+        server: ftpupload.net  # Corrected FTP server URL
         username: ${{ secrets.FTP_USERNAME }}  # FTP username from GitHub Secrets
         password: ${{ secrets.FTP_PASSWORD }}  # FTP password from GitHub Secrets
         port: 21  # Port for FTP
-        protocol: ftps  # Specify FTPS for secure FTP
+        protocol: ftps  # Use ftps for secure FTP
         local-dir: ./  # Local directory to upload
         log-level: verbose  # Enable verbose logging for debugging
