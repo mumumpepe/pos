@@ -1,0 +1,23 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches:
+      - main  # Replace with your branch name if different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Upload to FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        ftp-server: ftps://ftpupload.net  # FTPS server URL for secure FTP
+        ftp-username: ${{ secrets.FTP_USERNAME }}  # FTP username from GitHub Secrets
+        ftp-password: ${{ secrets.FTP_PASSWORD }}  # FTP password from GitHub Secrets
+        local-dir: ./  # Local directory to upload (current directory in the repo)
+        git-ftp-args: --tls-auth --insecure  # Use TLS authentication, optional `--insecure` for self-signed certs
