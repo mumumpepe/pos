@@ -22,5 +22,5 @@ jobs:
         port: 21  # Port for FTP (default)
         protocol: ftp  # Use ftp for plain FTP (no encryption)
         local-dir: ./  # Local directory to upload
-        server-dir: /htdocs  # Remote directory to deploy files to
+        server-dir: /htdocs/  # Remote directory to deploy files to, must end with /
         log-level: verbose  # Enable verbose logging for debugging
