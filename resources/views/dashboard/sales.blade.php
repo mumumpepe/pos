@@ -65,16 +65,28 @@
                         <div class="leading-loose">
                             <div class="p-10 bg-white rounded shadow-xl">
                                 <div class="">
-                                    <div class="">
+                                    <x-div-input>
                                         <label class="block text-sm text-gray-600" for="product_name">Product Name</label>
-                                        <select class="w-full px-5 py-3 text-gray-700 bg-gray-200 rounded" id="product_name" name="product_name" required="">
-                                            <option>Juice</option>
-                                        </select>
+                                            <x-input type="text" name="product_name" class="w-full px-5 py-3 text-gray-700 bg-gray-200 rounded" required />
+                                        </x-div-input>
+
+
+                                        {{--                                        <select class="w-full px-5 py-3 text-gray-700 bg-gray-200 rounded" id="product_name" name="product_name" required="">--}}
+{{--                                            @foreach($products as $product)--}}
+{{--                                                <option>{{ $product['product_name'] }}</option>--}}
+{{--                                            @endforeach--}}
+
+{{--                                        </select>--}}
                                     </div>
 
                                     <x-div-input>
+                                        <x-label for="unit">Unit</x-label>
+                                        <x-input type="text" id="unit" name="unit" class="px-5 py-1" required/>
+                                    </x-div-input>
+
+                                    <x-div-input>
                                         <x-label for="quantity">Quantity</x-label>
-                                        <x-input type="number" min="1" id="sales_quantity" name="quantity" class="px-5 py-1" placeholder="10" oninput="calculateTotal()"></x-input>
+                                        <x-input type="number" min="1" id="sales_quantity" name="quantity" class="px-5 py-1" placeholder="10" oninput="calculateTotal()" required/>
                                     </x-div-input>
 
                                     <x-div-input>

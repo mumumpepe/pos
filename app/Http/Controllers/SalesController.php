@@ -11,16 +11,16 @@ class SalesController extends Controller
     public function store() {
         $attributes = request()->validate([
             'product_name' => ['required'],
-            'quantity' => ['required'],
-            'unity_price' => ['required'],
+            'quantity' => ['nullable'],
+            'unity_price' => ['nullable'],
             'total_price' => ['required'],
-            'customer_name' => ['required'],
-            'email' => ['required'],
-            'address' => ['required'],
-            'city' => ['required'],
-            'country' => ['required'],
-            'zip' => ['required'],
-            'phone' => ['required']
+            'customer_name' => ['nullable'],
+            'email' => ['nullable'],
+            'address' => ['nullable'],
+            'city' => ['nullable'],
+            'country' => ['nullable'],
+            'zip' => ['nullable'],
+            'phone' => ['nullable']
         ]);
 
        $job = Sales::create($attributes);
@@ -47,16 +47,16 @@ class SalesController extends Controller
     public  function update(Sales $sale){
         $attributes = request()->validate([
             'product_name' => ['required'],
-            'quantity' => ['required'],
-            'unity_price' => ['required'],
+            'quantity' => ['nullable'],
+            'unity_price' => ['nullable'],
             'total_price' => ['required'],
-            'customer_name' => ['required'],
-            'email' => ['required'],
-            'address' => ['required'],
-            'city' => ['required'],
-            'country' => ['required'],
-            'zip' => ['required'],
-            'phone' => ['required']
+            'customer_name' => ['nullable'],
+            'email' => ['nullable'],
+            'address' => ['nullable'],
+            'city' => ['nullable'],
+            'country' => ['nullable'],
+            'zip' => ['nullable'],
+            'phone' => ['nullable']
         ]);
 
         $sale->update($attributes);

@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
-            $table->integer('quantity');
-            $table->integer('unity_price');
+            $table->string('unit')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->integer('unity_price')->nullable();
             $table->integer('total_price');
-            $table->string('customer_name');
-            $table->string('email');
-            $table->string('address');
-            $table->string('city');
-            $table->string('country');
-            $table->string('zip');
-            $table->string('phone');
+            $table->string('customer_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
+use App\Models\Product;
 use App\Models\Sales;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,10 @@ Route::get('/welcome', function(){
 
 
 Route::get('/sales', function(){
-    return view('dashboard.sales');
+    $job = Product::latest()->get();
+    return view('dashboard.sales', [
+        'products' => $job,
+    ]);
 });
 Route::get('/index', function() {
     return view('dashboard.index');

@@ -47,104 +47,113 @@
     <!-- ChartJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 
-    <script>
-        //create a new Date object
-        const now = new Date();
+<script>
+    // Create an array with the days of the week
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        //get the current day of the week
-        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const today = daysOfWeek[now.getDay()];
-        const one = daysOfWeek[now.getDay()+1];
-        const two = daysOfWeek[now.getDay()+2];
-        const three = daysOfWeek[now.getDay()+3];
-        const four = daysOfWeek[now.getDay()+4];
-        const five = daysOfWeek[now.getDay()+5];
-        const six = daysOfWeek[now.getDay()+6];
+    // Create a new Date object
+    const now = new Date();
 
-        const day_one = {{ json_encode($day_one) }};
-        const day_two = {{ json_encode($day_two) }};
-        const day_three = {{ json_encode($day_three) }};
-        const day_four = {{ json_encode($day_four) }};
-        const day_five = {{ json_encode($day_five) }};
-        const day_six = {{ json_encode($day_six) }};
-        const day_seven = {{ json_encode($day_seven) }};
+    // Get the current day of the week
+    const todayIndex = now.getDay();
 
+    // Create an array to store the names of the last 7 days, starting from today and going backwards
+    const last7Days = [];
+    for (let i = 0; i < 7; i++) {
+        let dayIndex = (todayIndex - i + 7) % 7;  // Handle negative indices to wrap around the week
+        last7Days.push(daysOfWeek[dayIndex]);
+    }
 
-        var chartOne = document.getElementById('chartOne');
-        var myChart = new Chart(chartOne, {
-            type: 'bar',
-            data: {
-                labels: [today, one, two, three, four, five, six],
-                datasets: [{
-                    label: 'Day sale',
-                    data: [day_one, day_two, day_three, day_four, day_five, day_six, day_seven],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
+    // Data fetched from backend for the last 7 days
+    const day_one = {{ json_encode($day_one) }};
+    const day_two = {{ json_encode($day_two) }};
+    const day_three = {{ json_encode($day_three) }};
+    const day_four = {{ json_encode($day_four) }};
+    const day_five = {{ json_encode($day_five) }};
+    const day_six = {{ json_encode($day_six) }};
+    const day_seven = {{ json_encode($day_seven) }};
+
+    // Reverse the order of the sales data to match the order of days
+    const salesData = [day_seven, day_six, day_five, day_four, day_three, day_two, day_one];
+
+    // Chart 1: Bar chart
+    var chartOne = document.getElementById('chartOne');
+    var myChart = new Chart(chartOne, {
+        type: 'bar',
+        data: {
+            labels: last7Days,  // Use the last 7 days as labels
+            datasets: [{
+                label: 'Day Sale',
+                data: salesData,  // Use the sales data for the last 7 days
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
-        });
+        }
+    });
 
-        var chartTwo = document.getElementById('chartTwo');
-        var myLineChart = new Chart(chartTwo, {
-            type: 'line',
-            data: {
-                labels: [today, one, two, three, four, five, six],
-                datasets: [{
-                    label: 'Day sale',
-                    data: [day_one, day_two, day_three, day_four, day_five, day_six, day_seven],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
+    // Chart 2: Line chart
+    var chartTwo = document.getElementById('chartTwo');
+    var myLineChart = new Chart(chartTwo, {
+        type: 'line',
+        data: {
+            labels: last7Days,  // Use the last 7 days as labels
+            datasets: [{
+                label: 'Day Sale',
+                data: salesData,  // Use the sales data for the last 7 days
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
-        });
-    </script>
+        }
+    });
+</script>
+
 </body>
 </html>
