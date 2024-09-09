@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -65,5 +67,31 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+    public function update_password(User $id) {
+        $password = request()->validate([
+            'password' => ['required'],
+            ]);
+
+        $id->update($password);
+
+       return redirect ('/account')->with('success', "PASSWORD UPDATE SUCCESSFULLY");
+    }
+
+    public function uploadImage(Request $request, User $id)
+    {
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('public/images');
+        $file = basename($path);
+
+       //updating path
+        $id->update(array('image_path' => $file));
+
+        return redirect('/account');
+    }
+
 
 }

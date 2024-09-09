@@ -71,4 +71,9 @@ class SalesController extends Controller
         return redirect('/admin/sales');
 
     }
+
+    public function profile() {
+        return view ('dashboard.profile-management');
+}
+
 }

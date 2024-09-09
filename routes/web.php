@@ -91,3 +91,10 @@ Route::get('/pdf/{start}/{end}', [AdminController::class , 'pdf']);
 
 
 Route::post('/logout', [UserController::class, 'logout']);
+
+Route::get('/account', [SalesController::class, 'profile']);
+Route::post('/upload/{id}', [UserController::class, 'uploadImage']);
+
+Route::patch('user/{id}/password', [UserController::class, 'update_password']);
+
+
