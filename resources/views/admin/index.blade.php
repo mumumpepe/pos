@@ -47,41 +47,39 @@
     <!-- ChartJS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
 
-<script>
-    // Create an array with the days of the week
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+<script>
     // Create a new Date object
     const now = new Date();
 
-    // Get the current day of the week
-    const todayIndex = now.getDay();
-
-    // Create an array to store the names of the last 7 days, starting from today and going backwards
+    // Create an array to store the dates of the last 7 days
     const last7Days = [];
     for (let i = 0; i < 7; i++) {
-        let dayIndex = (todayIndex - i + 7) % 7;  // Handle negative indices to wrap around the week
-        last7Days.push(daysOfWeek[dayIndex]);
+        // Create a new date object for each day
+        let date = new Date(now);
+        date.setDate(now.getDate() - i); // Subtract i days from today
+        // Format the date as YYYY-MM-DD
+        last7Days.unshift(date.toISOString().split('T')[0]);
     }
 
     // Data fetched from backend for the last 7 days
-    const day_one = {{ json_encode($day_one) }};
-    const day_two = {{ json_encode($day_two) }};
-    const day_three = {{ json_encode($day_three) }};
-    const day_four = {{ json_encode($day_four) }};
-    const day_five = {{ json_encode($day_five) }};
-    const day_six = {{ json_encode($day_six) }};
-    const day_seven = {{ json_encode($day_seven) }};
+    const dayOne = @json($day_one);
+    const dayTwo = @json($day_two);
+    const dayThree = @json($day_three);
+    const dayFour = @json($day_four);
+    const dayFive = @json($day_five);
+    const daySix = @json($day_six);
+    const daySeven = @json($day_seven);
 
-    // Reverse the order of the sales data to match the order of days
-    const salesData = [day_seven, day_six, day_five, day_four, day_three, day_two, day_one];
+    // Reverse the order of the sales data to match the order of dates
+    const salesData = [daySeven, daySix, dayFive, dayFour, dayThree, dayTwo, dayOne];
 
     // Chart 1: Bar chart
     var chartOne = document.getElementById('chartOne');
     var myChart = new Chart(chartOne, {
         type: 'bar',
         data: {
-            labels: last7Days,  // Use the last 7 days as labels
+            labels: last7Days,  // Use the last 7 days' dates as labels
             datasets: [{
                 label: 'Day Sale',
                 data: salesData,  // Use the sales data for the last 7 days
@@ -91,6 +89,7 @@
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
@@ -99,6 +98,7 @@
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
@@ -120,7 +120,7 @@
     var myLineChart = new Chart(chartTwo, {
         type: 'line',
         data: {
-            labels: last7Days,  // Use the last 7 days as labels
+            labels: last7Days,  // Use the last 7 days' dates as labels
             datasets: [{
                 label: 'Day Sale',
                 data: salesData,  // Use the sales data for the last 7 days
@@ -130,6 +130,7 @@
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
                     'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
@@ -138,6 +139,7 @@
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
@@ -154,6 +156,17 @@
         }
     });
 </script>
+
+<script>
+    console.log('Day One:', @json($day_one));
+    console.log('Day Two:', @json($day_two));
+    console.log('Day Three:', @json($day_three));
+    console.log('Day Four:', @json($day_four));
+    console.log('Day Five:', @json($day_five));
+    console.log('Day Six:', @json($day_six));
+    console.log('Day Seven:', @json($day_seven));
+</script>
+
 
 </body>
 </html>

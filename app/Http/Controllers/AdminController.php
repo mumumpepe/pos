@@ -22,11 +22,11 @@ class AdminController extends Controller
     }
 
     public function index() {
-        if(! Auth::user()) {
+        if (!Auth::user()) {
             abort(403);
         }
 
-        //date from today
+        // Date from today
         $one = date('Y-m-d');
         $two = date('Y-m-d', strtotime('-1 days'));
         $three = date('Y-m-d', strtotime('-2 days'));
@@ -35,39 +35,26 @@ class AdminController extends Controller
         $six = date('Y-m-d', strtotime('-5 days'));
         $seven = date('Y-m-d', strtotime('-6 days'));
 
-        //getting total sales per day
-        $day_one = Sales::whereBetween('created_at', [$one, $one.'23:59:59'])->get();
-        $sum_one = $day_one->sum('total_price');
-
-        $day_two = Sales::whereBetween('created_at', [$two, $two.'23:59:59'])->get();
-        $sum_two = $day_two->sum('total_price');
-
-        $day_three = Sales::whereBetween('created_at', [$three, $three.'23:59:59'])->get();
-        $sum_three = $day_three->sum('total_price');
-
-        $day_four = Sales::whereBetween('created_at', [$four, $four.'23:59:59'])->get();
-        $sum_four = $day_four->sum('total_price');
-
-        $day_five = Sales::whereBetween('created_at', [$five, $five.'23:59:59'])->get();
-        $sum_five = $day_five->sum('total_price');
-
-        $day_six = Sales::whereBetween('created_at', [$six, $six.'23:59:59'])->get();
-        $sum_six = $day_six->sum('total_price');
-
-        $day_seven = Sales::whereBetween('created_at', [$seven, $seven.'23:59:59'])->get();
-        $sum_seven = $day_seven->sum('total_price');
-
+        // Getting total sales per day
+        $day_one = Sales::whereBetween('created_at', ["{$one} 00:00:00", "{$one} 23:59:59"])->sum('total_price');
+        $day_two = Sales::whereBetween('created_at', ["{$two} 00:00:00", "{$two} 23:59:59"])->sum('total_price');
+        $day_three = Sales::whereBetween('created_at', ["{$three} 00:00:00", "{$three} 23:59:59"])->sum('total_price');
+        $day_four = Sales::whereBetween('created_at', ["{$four} 00:00:00", "{$four} 23:59:59"])->sum('total_price');
+        $day_five = Sales::whereBetween('created_at', ["{$five} 00:00:00", "{$five} 23:59:59"])->sum('total_price');
+        $day_six = Sales::whereBetween('created_at', ["{$six} 00:00:00", "{$six} 23:59:59"])->sum('total_price');
+        $day_seven = Sales::whereBetween('created_at', ["{$seven} 00:00:00", "{$seven} 23:59:59"])->sum('total_price');
 
         return view('admin.index', [
-            'day_one' => $sum_one,
-            'day_two' => $sum_two,
-            'day_three' => $sum_three,
-            'day_four' => $sum_four,
-            'day_five' => $sum_five,
-            'day_six' => $sum_six,
-            'day_seven' => $sum_seven,
+            'day_one' => $day_one,
+            'day_two' => $day_two,
+            'day_three' => $day_three,
+            'day_four' => $day_four,
+            'day_five' => $day_five,
+            'day_six' => $day_six,
+            'day_seven' => $day_seven,
         ]);
     }
+
 
     public function sales() {
         if(! Auth::user()) {
